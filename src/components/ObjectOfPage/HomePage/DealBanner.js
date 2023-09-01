@@ -1,5 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import $ from 'jquery'
+import Countdown from 'react-countdown-now';
 const DealBanner = () => {
+    useEffect(()=>{
+        /*------------------
+            Background Set
+        --------------------*/
+        $('.set-bg').each(function () {
+            var bg = $(this).data('setbg');
+            $(this).css('background-image', 'url(' + bg + ')');
+        });
+    },[])
+    const timerdate = new Date('2023-12-31').getTime(); // Thời gian kết thúc đếm ngược
+
+    // Định dạng thời gian đếm ngược
+    const renderer = ({ days, hours, minutes, seconds }) => (
+        <div>
+            <div className="cd-item"><span>{days}</span> <p>Days</p> </div>
+            <div className="cd-item"><span>{hours}</span> <p>Hrs</p> </div>
+            <div className="cd-item"><span>{minutes}</span> <p>Mins</p> </div>
+            <div className="cd-item"><span>{seconds}</span> <p>Secs</p> </div>
+        </div>
+    );
     return (
         <section className="deal-of-week set-bg spad" data-setbg="assets/img/time-bg.jpg">
             <div className="container">
@@ -14,7 +36,7 @@ const DealBanner = () => {
                         </div>
                     </div>
                     <div className="countdown-timer" id="countdown">
-                        <div className="cd-item">
+                        {/* <div className="cd-item">
                             <span>56</span>
                             <p>Days</p>
                         </div>
@@ -29,7 +51,8 @@ const DealBanner = () => {
                         <div className="cd-item">
                             <span>52</span>
                             <p>Secs</p>
-                        </div>
+                        </div> */}
+                        <Countdown date={timerdate} renderer={renderer} />
                     </div>
                     <a href="/shop" className="primary-btn">Shop Now</a>
                 </div>

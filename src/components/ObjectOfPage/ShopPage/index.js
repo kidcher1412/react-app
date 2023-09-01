@@ -51,14 +51,7 @@ const ProductShop = ()=>{
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values => {
-            console.log(values.brand)
-            console.log(values.MinCost)
-            console.log(values.MaxCost)
-            console.log(values.Colors)
-            console.log(values.Sizes)
-            console.log(values.Tags)
-            console.log(values.SortType)
-            console.log(values.FillType)
+            console.log(values)
         },
     });
     const dataTags = [{ name: "Towel" }, { name: "Shoes" }]

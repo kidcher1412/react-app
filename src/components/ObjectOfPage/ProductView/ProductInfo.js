@@ -1,9 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, FastField } from 'formik';
 import { useFormik } from 'formik';
 import $ from 'jquery';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 // import * as Yup from 'yup';
 const ProductInfo = ()=>{
+    useEffect(()=>{
+        /*------------------
+        Single Product
+        --------------------*/
+        $('.product-thumbs-track .pt').on('click', function () {
+            $('.product-thumbs-track .pt').removeClass('active');
+            $(this).addClass('active');
+            var imgurl = $(this).data('imgbigurl');
+            var bigImg = $('.product-big-img').attr('src');
+            if (imgurl != bigImg) {
+                $('.product-big-img').attr({ src: imgurl });
+                $('.zoomImg').attr({ src: imgurl });
+            }
+        });
+        $('.sc-item input[type="radio"], .cc-item input[type="radio"]').each(function () {
+            if ($(this).is(':checked')) {
+                $(this).siblings('label').addClass('active');
+            } else {
+                $(this).siblings('label').removeClass('active');
+            }
+        });
+        // handleChange input
+        $(".fw-size-choose .sc-item input[type='checkbox'], .pd-size-choose .sc-item input[type='radio']").on('change', function () {
+            $(".pd-size-choose .sc-item label").removeClass('active');
+            if ($(this).is(':checked'))
+                $(this).siblings('label').addClass('active');
+            else
+                $(this).siblings('label').removeClass('active');
+        });
+        $(".fw-tags input[type='checkbox']").on('change', function () {
+            $(".pd-color-choose .cc-item label").removeClass('active');
+            if ($(this).is(':checked'))
+                $(this).siblings('label').addClass('active');
+            else
+                $(this).siblings('label').removeClass('active');
+        });
+    },[])
     const ProductPortCart = useFormik({
         initialValues: {
             quantity: '1',
@@ -41,7 +82,11 @@ const ProductInfo = ()=>{
                             </div>
                     </div>
                     <div className="product-thumbs">
-                        <div className="product-thumbs-track ps-slider owl-carousel">
+                        <OwlCarousel className="product-thumbs-track ps-slider owl-carousel"
+                            navText={['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']}
+                            loop={false} nav={true} items={3} smartSpeed={1200} autoplay={true} autoHeightClass={false}
+                            margin={25} dots={false} 
+                        >
                             <div className="pt active" data-imgbigurl="assets/img/product-single/product-1.jpg"><img
                                 src="assets/img/product-single/product-1.jpg" alt=""/></div>
                             <div className="pt" data-imgbigurl="assets/img/product-single/product-2.jpg"><img
@@ -50,7 +95,7 @@ const ProductInfo = ()=>{
                                 src="assets/img/product-single/product-3.jpg" alt=""/></div>
                             <div className="pt" data-imgbigurl="assets/img/product-single/product-3.jpg"><img
                                 src="assets/img/product-single/product-3.jpg" alt=""/></div>
-                        </div>
+                        </OwlCarousel>
                     </div>
                 </div>
                 <div className="col-lg-6">

@@ -21,7 +21,7 @@ const FillterWidget_Color = ({data,formik}) => {
                     <div className="fw-color-choose">
                         {data && data.map((item, index) => (
                             <div key={index} className="cs-item">
-                                <input type="checkbox" name="Tags" value={item.name} onChange={formik.handleChange} checked={formik.values.Colors.includes(item.name)} id={item.name} />
+                                <input type="checkbox" name="Colors" value={item.name} onChange={formik.handleChange} checked={formik.values.Colors.includes(item.name)} id={item.name} />
                                 <label className={item.name} htmlFor={item.name}>{item.name}</label>
                             </div>
                         ))}
