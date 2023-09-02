@@ -16,7 +16,7 @@ import axios from "axios";
 
 const ProductShop = ()=>{
     const [datafillter, setData] = useState([]);
-    const [productfillter, setDatafillter] = useState([]);
+    const [productfillter, setDatafillter] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -32,8 +32,8 @@ const ProductShop = ()=>{
     const FilerData = useFormik({
         initialValues: {
             brand: [],
-            MinCost: "100",
-            MaxCost: "1000",
+            MinCost: "",
+            MaxCost: "",
             Colors: [],
             Sizes: [],
             Tags: [],
@@ -43,15 +43,7 @@ const ProductShop = ()=>{
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values => {
-            console.log(values)
-            axios.post('http://localhost:8080/api/getProductByID', { ProductID: "9" })
-                .then(response => {
-                    setDatafillter(response.data.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                    setError(err);
-                });
+            setDatafillter(values);
         },
     });
     return(<div>

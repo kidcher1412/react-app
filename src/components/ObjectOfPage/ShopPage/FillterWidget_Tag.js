@@ -18,7 +18,7 @@ const FillterWidget_Tag = ({ data, formik }) => {
             <div className="fw-tags">
                 {data && data.map((item, index) => (
                     <div key={index} style={{ display: "inline-block" }}>
-                        <input style={{ visibility: "hidden", position: "absolute" }} name="Tags" type="checkbox" value={item.name} checked={formik.values.Tags.includes(item.name)} onChange={formik.handleChange} id={`tag-${index}`} />
+                        <input style={{ visibility: "hidden", position: "absolute" }} name="Tags" type="checkbox" value={item.id.toString()} checked={formik.values.Tags.includes(item.id.toString())} onChange={formik.handleChange} id={`tag-${index}`} />
                         <label key={index} htmlFor={`tag-${index}`} href="#" className="fw-tag">
                             {item.name}
                         </label>

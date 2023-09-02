@@ -11,7 +11,6 @@ import HomePage from '../ObjectOfPage/HomePage/index'
 import ProductView from '../ObjectOfPage/ProductView/index'
 import Test from '../test';
 import Test1 from '../test1';
-import Test2 from '../test1base';
 import LoginPage from '../ObjectOfPage/LoginPage';
 import RegisterPage from '../ObjectOfPage/RegisterPage';
 import CartPage from '../ObjectOfPage/CartPage';
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
     {
         path: '/test1',
         element: <Test1></Test1>,
-    },
-    {
-        path: '/test2',
-        element: <Test2></Test2>,
     },
     {
         path: '/',

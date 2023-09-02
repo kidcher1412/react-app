@@ -16,18 +16,11 @@ const FillterWidget_Brand = ({data, formik }) => {
                             <div key={index} className="bc-item">
                                 <label htmlFor={"bc-"+item.id}>
                                     {item.name}
-                                    <input type="checkbox" name="brand" id={"bc-"+item.id} value={item.name} onChange={formik.handleChange} checked={formik.values.brand.includes(item.name)} />
+                                    <input type="checkbox" name="brand" id={"bc-" + item.id} value={item.id.toString()} onChange={formik.handleChange} checked={formik.values.brand.includes(item.id.toString())} />
                                     <span className="checkmark"></span>
                                 </label>
                             </div>
                         ))}
-                        <div className="bc-item">
-                            <label htmlFor="bc-calvin">
-                                Calvin Klein
-                                <input type="checkbox" id="bc-calvin"/>
-                                <span className="checkmark"></span>
-                            </label>
-                        </div>
                     </div>
                     <button type="submit" value="Xem" >Sign In</button>
                 </div>

@@ -18,7 +18,7 @@ const FillterWidget_Size = ({ data, formik }) => {
             <div className="fw-size-choose">
                 {data && data.map((item, index) => (
                     <div className="sc-item" key={item.name}> {/* Thêm key cho mỗi phần tử */}
-                        <input type="checkbox" name="Sizes" value={item.name} onChange={formik.handleChange} checked={formik.values.Sizes.includes(item.name)} id={item.name} />
+                        <input type="checkbox" name="Sizes" value={item.id.toString()} onChange={formik.handleChange} checked={formik.values.Sizes.includes(item.id.toString())} id={item.name} />
                         <label htmlFor={item.name}>{item.name}</label>
                     </div>
                 ))}

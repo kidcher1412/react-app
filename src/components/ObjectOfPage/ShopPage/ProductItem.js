@@ -2,9 +2,21 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
+// datafill's Struct
+// {
+//     Colors: [],
+//     FillType: "price",
+//     MaxCost: "1000",
+//     MinCost: "100",
+//     Sizes: [],
+//     SortType: "asc",
+//     Tags: [],
+//     brand: [],
+// }
 const ProductItem = ({datafill}) => {
     const [dataProduct, setDataProduct] = useState([]);
     const [isLoading, setisLoading] = useState(true);
+    const [CantFind, setCantFind] = useState(false);
     const [Error, setError] = useState(null);
     useEffect(() => {
         axios.post('http://localhost:8080/api/listProduct')
@@ -18,18 +30,38 @@ const ProductItem = ({datafill}) => {
             });
     }, []);
     useEffect(() => {
-        if (datafill && datafill.length > 0) {
-            setDataProduct(datafill);
+        if (datafill !== null) {
+            setisLoading(true);
+            console.log(datafill);
+            axios
+                .post('http://localhost:8080/api/getProductFillted', datafill)
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data.length==0)
+                        setCantFind(true)
+                    else{
+                        setDataProduct(response.data)
+                        setCantFind(false)
+                    }
+                    setisLoading(false);
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setError(err);
+                });
         }
     }, [datafill]);
     if (Error)
         return <p>error</p>
+    if (CantFind)
+        return <p>There're not have any Product</p>
     if (isLoading)
         return (
             <div id="skeleton">
                 <SkeletonTheme baseColor="#e4e0e0" highlightColor="#cbc7c7" >
                     <p>
-                        <Skeleton height={150} width={200} />
+                        <Skeleton height={350} width={280} />
                         <Skeleton height={15} width={200} />
                         <Skeleton height={15} width={200} />
                         <Skeleton height={15} width={200} />
