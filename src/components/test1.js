@@ -29,7 +29,7 @@ const test1 = () => {
                         Subscribe to newsletter
                     </label>
                     <FieldArray name="selectboxs">
-                        {({ push, remove }) => (
+                        {() => (
                             <div>
                                 <h2>Checkboxes</h2>
                                 <label>

@@ -16,21 +16,13 @@ import axios from "axios";
 
 const ProductShop = ()=>{
     const [datafillter, setData] = useState([]);
-    const [dataProduct, setDataProduct] = useState([]);
+    const [productfillter, setDatafillter] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         axios.post('http://localhost:8080/api/getfillter')
             .then(response => {
                 setData(response.data.data);
-            })
-            .catch(err => {
-                console.log(err);
-                setError(err);
-            });
-        axios.post('http://localhost:8080/api/listProduct')
-            .then(response => {
-                setDataProduct(response.data.data);
             })
             .catch(err => {
                 console.log(err);
@@ -52,10 +44,16 @@ const ProductShop = ()=>{
         validateOnChange: false,
         onSubmit: async values => {
             console.log(values)
+            axios.post('http://localhost:8080/api/getProductByID', { ProductID: "9" })
+                .then(response => {
+                    setDatafillter(response.data.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                    setError(err);
+                });
         },
     });
-    const dataTags = [{ name: "Towel" }, { name: "Shoes" }]
-    const dataSize = [{ name: "S" }, { name: "M" }, { name: "L" }, { name: "XS" }]
     return(<div>
         <Helmet>
             <title>Shoping</title>
@@ -78,9 +76,7 @@ const ProductShop = ()=>{
                         <ProductOptionShow formik={FilerData}></ProductOptionShow>
                         <div className="product-list">
                             <div className="row">
-                                {dataProduct && dataProduct.map((item,index)=>(
-                                    <ProductItem data={item} key={index}></ProductItem>
-                                ))}
+                                <ProductItem datafill={productfillter}></ProductItem>
                                 {/* <ProductItem></ProductItem>
                                 <ProductItem></ProductItem> */}
                             </div>
