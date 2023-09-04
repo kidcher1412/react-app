@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from 'react-helmet';
+import { useParams } from 'react-router-dom';
+import $ from 'jquery';
 
 import FillterWidget_Category from "../ShopPage/FillterWidget_Category";
 import FillterWidget_Brand from "../ShopPage/FillterWidget_Brand";
@@ -11,8 +13,25 @@ import FillterWidget_Tag from "../ShopPage/FillterWidget_Tag";
 import ProductInfo from "./ProductInfo";
 import RelateProduct from "./RelateProduct";
 import { useFormik } from "formik";
+import { useLocation } from 'react-router-dom';
+import Motion from "./motion";
 
 const ProductView = ()=>{
+    useEffect(() => {
+        // Đặt mã jQuery trong hàm useEffect
+        $('.sc-item input[type="radio"], .cc-item input[type="radio"]').each(function () {
+            if ($(this).is(':checked')) {
+                $(this).siblings('label').addClass('active');
+            } else {
+                $(this).siblings('label').removeClass('active');
+            }
+        });
+    }, []); // Sử dụng [] để đảm bảo mã này chỉ chạy một lần sau khi component được render
+
+        const location = useLocation();
+        const searchParams = new URLSearchParams(location.search);
+        const id = searchParams.get('id_product');
+        console.log(id)
         const FilerData = useFormik({
         initialValues: {
             brand: [],
@@ -31,8 +50,6 @@ const ProductView = ()=>{
             console.log(values.Tags)
         },
     });
-    const dataTags = [{ name: "Towel" }, { name: "Shoes" }]
-    const dataSize = [{ name: "S" }, { name: "M" }, { name: "L" }, { name: "XS" }]
     return (<div>
         <Helmet>
             <title>Product Info</title>
@@ -49,7 +66,7 @@ const ProductView = ()=>{
                         <FillterWidget_Color formik={FilerData}></FillterWidget_Color>
 
                     </div>
-                    <ProductInfo></ProductInfo>
+                    <ProductInfo id_product={id}></ProductInfo>
                 </div>
             </div>
         </section>

@@ -2286,7 +2286,10 @@ ol {
 	text-transform: uppercase;
 	cursor: pointer;
 }
-
+.product-details .pd-size-choose .sc-item.checker-true label{
+	color: #b6b2b2;
+	background-color: #9f9f9f;
+}
 .product-details .pd-size-choose .sc-item label.active {
 	background: #252525;
 	color: #ffffff;

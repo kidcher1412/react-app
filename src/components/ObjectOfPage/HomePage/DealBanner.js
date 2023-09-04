@@ -36,22 +36,6 @@ const DealBanner = () => {
                         </div>
                     </div>
                     <div className="countdown-timer" id="countdown">
-                        {/* <div className="cd-item">
-                            <span>56</span>
-                            <p>Days</p>
-                        </div>
-                        <div className="cd-item">
-                            <span>12</span>
-                            <p>Hrs</p>
-                        </div>
-                        <div className="cd-item">
-                            <span>40</span>
-                            <p>Mins</p>
-                        </div>
-                        <div className="cd-item">
-                            <span>52</span>
-                            <p>Secs</p>
-                        </div> */}
                         <Countdown date={timerdate} renderer={renderer} />
                     </div>
                     <a href="/shop" className="primary-btn">Shop Now</a>

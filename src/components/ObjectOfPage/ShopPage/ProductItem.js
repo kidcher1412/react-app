@@ -75,7 +75,7 @@ const ProductItem = ({datafill}) => {
              <div className="col-lg-4 col-sm-6" key={index}>
                  <div className="product-item">
                      <div className="pi-pic">
-                         <img src="assets/img/products/product-1.jpg" alt="" />
+                         <img src={item.image} alt="" />
                          <div className="sale pp-sale">Sale</div>
                          <div className="icon">
                              <i className="icon_heart_alt"></i>
