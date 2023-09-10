@@ -1,17 +1,22 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import { useAuthStore } from "../../store/store";
-import { Redirect } from 'react-router-dom';
-import $ from 'jquery'
-import LoadingPage from './loading';
+import { getAccount } from "../../helper/getaccount";
 import NotFound404 from './NotFound404';
 
+import axios from '../../axios.js';
+
+
 const Header = () => {
+    
     const [data, setData] = useState([]);
+    const [userlogin, setUserLogin] = useState("");
     const [error, setError] = useState(null);
-    const usernameLoged = useAuthStore.getState().auth.username;
-    useEffect(() => {
-        axios.post('http://localhost:8080/api/getheader')
+    // const usernameLoged = useAuthStore.getState().auth.username; 
+    const usernameLoged = Cookies.get('token');
+    useEffect( () => {
+        axios.post('api/getheader')
             .then(response => {
                 if (response != error)
                 setData(response.data.data);
@@ -20,7 +25,23 @@ const Header = () => {
                 console.log(err);
                 setError(err);
             });
+            const fetchUserLogin = async () => {
+                const checkerLogin = await getAccount(usernameLoged);
+                if (checkerLogin !== null) {
+                    setUserLogin(checkerLogin);
+                }
+                console.log(userlogin);
+            };
+            fetchUserLogin();
     }, []);
+    const logout = async ()=>{
+        localStorage.removeItem('usernameLoged');
+        localStorage.removeItem('passwordLoged');
+        localStorage.removeItem('passwordLoged');
+        Cookies.remove('token');
+        setUserLogin('')
+        return
+    }
     if (error)
         return <NotFound404/>
     if(data.brand)
@@ -40,14 +61,18 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="ht-right">
-                            <a href="#" className="login-panel"><i className="fa fa-user"></i>Login</a>
+                            {userlogin!=='' ? (
+                                <a href="#" onClick={logout} className="login-panel"><i className="fa fa-user"></i>xin chào {userlogin}</a>
+                            ) : (
+                                <a href="#" className="login-panel"><i className="fa fa-user"></i>Login</a>
+                            )}
                             <div className="lan-selector">
-                                <select className="language_drop" name="countries" id="countries" style={{ width: "300px" }}>
+                                {/* <select className="language_drop" name="countries" id="countries" style={{ width: "300px" }}>
                                     <option value='yt' data-image="assets/img/flag-1.jpg" data-imagecss="flag yt"
                                         data-title="English">English</option>
                                     <option value='yu' data-image="assets/img/flag-2.jpg" data-imagecss="flag yu"
                                         data-title="Bangladesh">German </option>
-                                </select>
+                                </select> */}
                             </div>
                             <div className="top-social">
                                 <a href="#"><i className="ti-facebook"></i></a>

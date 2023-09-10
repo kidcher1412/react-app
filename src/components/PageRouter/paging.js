@@ -17,7 +17,7 @@ import LoginPage from '../ObjectOfPage/LoginPage';
 import RegisterPage from '../ObjectOfPage/RegisterPage';
 import CartPage from '../ObjectOfPage/CartPage';
 import LoadingPage from '../ComponentPaging/loading';
-import axios from 'axios';
+import axios from '../../axios';
 import NotFound404 from '../ComponentPaging/NotFound404';
 import NotFound505 from '../ComponentPaging/NotFound505';
 
@@ -80,7 +80,7 @@ const Page = ({titlePage,namePage}) => {
     };
     useEffect(() => {
         // Gửi yêu cầu Axios tới server
-        axios.get('http://localhost:8080/')
+        axios.get('/')
             .then(response => {
                 // Xử lý phản hồi thành công và cập nhật dữ liệu trang
                 setPageDataIndex({

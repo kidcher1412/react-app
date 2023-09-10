@@ -1,7 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
+
+import axios from "../../../axios";
+
 // datafill's Struct
 // {
 //     Colors: [],
@@ -19,7 +21,7 @@ const ProductItem = ({datafill}) => {
     const [CantFind, setCantFind] = useState(false);
     const [Error, setError] = useState(null);
     useEffect(() => {
-        axios.post('http://localhost:8080/api/listProduct')
+        axios.post('api/listProduct')
             .then(response => {
                 setDataProduct(response.data.data);
                 setisLoading(false);
@@ -82,7 +84,7 @@ const ProductItem = ({datafill}) => {
                          </div>
                          <ul>
                              <li className="w-icon active"><a href="#"><i className="icon_bag_alt"></i></a></li>
-                             <li className="quick-view"><a href="#">+ Quick View</a></li>
+                             <li className="quick-view"><a href={"/product?id_product=" + item.id}>+ Quick View</a></li>
                              <li className="w-icon"><a href="#"><i className="fa fa-random"></i></a></li>
                          </ul>
                      </div>

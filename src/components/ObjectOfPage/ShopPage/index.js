@@ -11,7 +11,7 @@ import ProductOptionShow from "./ProductOptionShow";
 import ProductItem from "./ProductItem";
 import { Helmet } from 'react-helmet';
 import { data } from "jquery";
-import axios from "axios";
+import axios from "../../../axios";
 
 
 const ProductShop = ()=>{
@@ -20,7 +20,7 @@ const ProductShop = ()=>{
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/api/getfillter')
+        axios.post('api/getfillter')
             .then(response => {
                 setData(response.data.data);
             })

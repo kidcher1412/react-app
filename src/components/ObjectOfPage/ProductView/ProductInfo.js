@@ -5,7 +5,7 @@ import $ from 'jquery';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import axios from "axios";
+import axios from "../../../axios";
 import Motion from "./motion";
 
 // import * as Yup from 'yup';
@@ -21,7 +21,7 @@ const ProductInfo = ({ id_product })=>{
             const json = {
                 id_product: id_product.toString()
             }
-            axios.post("http://localhost:8080/api/getproductbyid", json)
+            axios.post("api/getproductbyid", json)
                 .then(response => {
                     setDataProduct(response.data.data[0]);
                     setisLoading(false);

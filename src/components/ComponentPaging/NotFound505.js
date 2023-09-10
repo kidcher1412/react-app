@@ -19,7 +19,7 @@ const NotFound505 = ()=>{
                                     Look like My website is Turn Off
                                 </h3>
 
-                                <p>Sory! My website is breakdown, see you latter~~~</p>
+                                <p>Sory! My website is breakdown, see you latter~~~==!</p>
 
                                 <a href="/" className="link_404">Reload</a>
                             </div>

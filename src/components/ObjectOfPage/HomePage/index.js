@@ -10,8 +10,6 @@ import { data } from "jquery";
 
 
 const HomePage = () => {
-    const dataTags = [{ name: "Towel" }, { name: "Shoes" }]
-    const dataSize = [{ name: "S" }, { name: "M" }, { name: "L" }, { name: "XS" }]
     return (
         <div>
             <Heros></Heros>

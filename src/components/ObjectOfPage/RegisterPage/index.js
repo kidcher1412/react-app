@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import toast, { Toaster } from 'react-hot-toast';
-import axios from "axios";
+import axios from "../../../axios";
 
 const RegisterPage = () => {
     const initialValues = {
@@ -14,7 +14,7 @@ const RegisterPage = () => {
         console.log(values)
         const register = async () => {
             try {
-                const response = await axios.post('http://localhost:8080/api/register', values);
+                const response = await axios.post('api/register', values);
                 return response;
             } catch (error) {
                 throw new Error("error register...!");
